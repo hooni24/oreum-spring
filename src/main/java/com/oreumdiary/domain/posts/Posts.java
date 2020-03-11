@@ -1,5 +1,6 @@
 package com.oreumdiary.domain.posts;
 
+import com.oreumdiary.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Getter // Entity에는 setter를 절대 만들지 않아야 함! (필드값 변경이 필요한 경우 명확한 의도를 알수있는 메소드를 만들자)
 @NoArgsConstructor
 @Entity     // 테이블과 연결될 클래스임을 표시
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id     // PK임을 표시
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK생성규칙. IDENTITY를 추가해야 auto_increment됨.(스프링 2.0부터)
