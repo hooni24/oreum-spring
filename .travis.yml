@@ -36,7 +36,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: oreum-diary-build
-    key: oreum-diary.zip  # 빌드 파일을 압축해서 전달
+    key: oreum-spring.zip  # 빌드 파일을 압축해서 전달
     bundle_type: zip  #압축 확장자
     application: oreum-diary  #웹 콘솔에서 등록한 codedeploy 애플리케이션명
     deployment_group: oreum-diary-group # 웹 콘솔에서 등록한 codedeploy 배포그룹명
