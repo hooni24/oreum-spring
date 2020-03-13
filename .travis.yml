@@ -15,9 +15,27 @@ cache:  # 의존성 캐싱
 # master 브랜치에 푸시될때 실행될 스크립트
 script: "./gradlew clean build"
 
+
+# deploy 명령어 실행전에 수행 (CodeDeploy는 jar파일을 인식못해서 jar+기타설정 모아서 zip압축)
+before_deploy:
+  - zip -r oreum-spring *
+  - mkdir -p deploy
+  - mv oreum-spring.zip deploy/oreum-spring.zip
+  
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY  # travis에 설정해둔 variables사용
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: oerum-diary-build   # s3 버킷명
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip파일 접근을 private으로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리명 ( zip파일이 존재할 곳 )
+    wait-until-deployed: true
+
+
 # CI 실행 완료시 메일로 알람
 notifications:
   email:
     recipients:
       - admin@oreumdiary.com
-
